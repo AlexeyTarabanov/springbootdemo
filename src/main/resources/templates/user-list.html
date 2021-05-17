@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<!-- th- аналог import в нашем java классе
+     здесь, я говорю, что работаю с user-ом
+     (то есть, я откуда-то из внешнего мира,
+      получил какую-то штуку под названием users
+      switch - аналог if в нашем коде-->
+<div th:switch="${users}">
+    <!-- если сущность users, которую я передал = null,
+        то я пишу No users found!-->
+    <h2 th:case="null">No users found!</h2>
+    <!-- во всех остальных случаях
+     в div я вложу блок кода-->
+    <div th:case="*">
+        <h2>Users</h2>
+        <!-- в div-e у меня есть небольшая таблица -->
+        <table>
+            <thead>
+            <tr>
+                <!-- в таблице есть поля: id, firstName, LastName -->
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- и теперь я говорю, что для каждого usera-a из коллекции users-->
+            <tr th:each="user : ${users}">
+                <!-- в этой коллекции, я хочу для каждого из user-ов вывести его
+                 id, firstName и lastName -->
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <!-- здесь представлены 2 ссылки: update и delete -->
+                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- здесь уже у нас есть кнопка Create user -->
+    <p><a href="/user-create">Create user</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+<body>
+<!-- здесь есть у нас форма <form> в которой
+    мы дергаем метод post с ссылкой /user-update
+    и передаем сюда "${user}", который мы сформируем ниже
+    у этого юзера я говорю, что
+    есть input, в котором я могу менять имя и фамилию
+    есть id, который так же отображается
+    при нажатии кнопки Update User у меня должен "дернуться"
+    метод user-update
+    -->
+<form action="#" th:action="@{/user-update}" th:object="${user}" method="post">
+    <label for="id">ID</label>
+    <!-- readonly означает, что я не могу в форме изменить значение id -->
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br/>
+    <label for="firstName">First name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
+    <br/>
+    <label for="lastName">Last name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    <br/>
+    <input type="submit" value="Update User">
+</form>
+</body>
+</html>
